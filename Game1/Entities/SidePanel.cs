@@ -16,7 +16,6 @@ namespace MapGenerator.Entities
     class SidePanel : DrawWindow
     {
         Texture2D DrawFont;
-        private ContentLoader loader;
         private Map Grid;
         private Drawer drawer;
 
@@ -26,13 +25,11 @@ namespace MapGenerator.Entities
             set { AutomaticInvalidation = value; }
         }
 
-
         public void ChangeDisplayedTile(String NewTile)
         {
-            Grid.Layers[0].FillLayer(NewTile);
-            GetAutoInvalidation = true;
+            Grid.Layers[0].ChangeTile(NewTile,1,1);
+            Invalidate();
         }
-
         protected override void Initialize()
         {
             GetAutoInvalidation = false;
@@ -40,19 +37,17 @@ namespace MapGenerator.Entities
             Editor.Content.RootDirectory = "Content";
             Editor.BackgroundColor = Color.Black;
             DrawFont = Editor.Content.Load<Texture2D>("terrain");
+            GlobalVariables.LOADER.LoadTileSheet(null, Editor);
             System.Diagnostics.Debug.WriteLine("Inside SidePanel");
-            loader = new ContentLoader(Editor);
-            loader.LoadTileSet("Terrain.tsx");
-            drawer = new Drawer(Editor, loader.Tiles, loader.TileSheet);
-            Grid = new Map(7,6,1);
-            Grid.Layers[0].FillLayer(GlobalConstants.DEFAULT_STONE);
+            drawer = new Drawer(Editor, GlobalVariables.LOADER.Tiles, GlobalVariables.LOADER.TileSheet);
+            Grid = new Map(2,2,1);
+            Grid.Layers[0].ChangeTile(GlobalConstants.DEFAULT_STONE,1,1);
         }
 
         protected override void Draw()
         {
-            if (GetAutoInvalidation) GetAutoInvalidation = false;
             base.Draw();
-            drawer.DrawMap(Grid);
+            drawer.DrawMap(Grid,4);
         }
     }
 }

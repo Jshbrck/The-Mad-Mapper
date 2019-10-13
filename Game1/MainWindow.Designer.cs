@@ -30,49 +30,50 @@ namespace MapGenerator
         /// </summary>
         private void InitializeComponent()
         {
-            this.GameWindow1 = new MapGenerator.Entities.GameWindow();
-            this.listBox1 = new MapGenerator.Entities.TileSelectionBox();
-            this.sidePanel1 = new MapGenerator.Entities.SidePanel();
+            this.MainScreen = new MapGenerator.Entities.GameWindow();
+            this.TileSelector = new MapGenerator.Entities.TileSelectionBox();
+            this.TilePreview = new MapGenerator.Entities.SidePanel();
             this.SuspendLayout();
             // 
-            // GameWindow1
+            // MainScreen
             // 
-            this.GameWindow1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.MainScreen.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.GameWindow1.Location = new System.Drawing.Point(12, 12);
-            this.GameWindow1.Name = "GameWindow1";
-            this.GameWindow1.Size = new System.Drawing.Size(968, 800);
-            this.GameWindow1.TabIndex = 0;
+            this.MainScreen.Location = new System.Drawing.Point(12, 12);
+            this.MainScreen.Name = "MainScreen";
+            this.MainScreen.Size = new System.Drawing.Size(968, 800);
+            this.MainScreen.TabIndex = 0;
             // 
-            // listBox1
+            // TileSelector
             // 
-            this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.TileSelector.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(996, 12);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(206, 602);
-            this.listBox1.TabIndex = 6;
+            this.TileSelector.FormattingEnabled = true;
+            this.TileSelector.Location = new System.Drawing.Point(996, 12);
+            this.TileSelector.Name = "TileSelector";
+            this.TileSelector.Size = new System.Drawing.Size(206, 602);
+            this.TileSelector.TabIndex = 6;
+            this.TileSelector.SelectedIndexChanged += new System.EventHandler(this.TileSelector_SelectedIndexChanged);
             // 
-            // sidePanel1
+            // TilePreview
             // 
-            this.sidePanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.sidePanel1.GetAutoInvalidation = false;
-            this.sidePanel1.Location = new System.Drawing.Point(996, 624);
-            this.sidePanel1.Name = "sidePanel1";
-            this.sidePanel1.Size = new System.Drawing.Size(206, 188);
-            this.sidePanel1.TabIndex = 5;
-            this.sidePanel1.Text = "sidePanel1";
+            this.TilePreview.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.TilePreview.GetAutoInvalidation = false;
+            this.TilePreview.Location = new System.Drawing.Point(996, 624);
+            this.TilePreview.Name = "TilePreview";
+            this.TilePreview.Size = new System.Drawing.Size(206, 188);
+            this.TilePreview.TabIndex = 5;
+            this.TilePreview.Text = "sidePanel1";
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1214, 823);
-            this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.sidePanel1);
-            this.Controls.Add(this.GameWindow1);
+            this.Controls.Add(this.TileSelector);
+            this.Controls.Add(this.TilePreview);
+            this.Controls.Add(this.MainScreen);
             this.Name = "MainWindow";
             this.Text = "MainWindow";
             this.ResumeLayout(false);
@@ -80,8 +81,8 @@ namespace MapGenerator
         }
 
         #endregion
-        private GameWindow GameWindow1;
-        private SidePanel sidePanel1;
-        private TileSelectionBox listBox1;
+        private GameWindow MainScreen;
+        private SidePanel TilePreview;
+        private TileSelectionBox TileSelector;
     }
 }

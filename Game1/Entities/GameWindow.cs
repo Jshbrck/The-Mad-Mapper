@@ -26,10 +26,7 @@ namespace MapGenerator.Entities
             base.Initialize();
             Editor.Content.RootDirectory = "Content";
             Editor.BackgroundColor = Color.Black;
-            System.Diagnostics.Debug.WriteLine("Inside GameWindow");
-            GlobalVariables.LOADER = new ContentLoader(Editor);
-            GlobalVariables.LOADER.LoadTileSet("Terrain.tsx");
-
+            GlobalVariables.LOADER.LoadTileSheet(Editor,null);
             InState = new InputState();
             GlobalVariables.CAMERA.SetAndCenterViewport(GlobalVariables.SCREEN_WIDTH,GlobalVariables.SCREEN_HEIGHT);
             drawer = new Drawer(Editor, GlobalVariables.LOADER.Tiles, GlobalVariables.LOADER.TileSheet);

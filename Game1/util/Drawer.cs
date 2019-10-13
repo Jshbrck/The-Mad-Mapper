@@ -22,6 +22,7 @@ namespace MapGenerator.Util
         Dictionary<String, Rectangle> Tiles;
         UpdateService Editor;
         DrawService Draw;
+        float fTileScale;
 
         public Drawer(UpdateService editor, Dictionary<String, Rectangle> tiles, Texture2D tileset)
         {
@@ -55,12 +56,12 @@ namespace MapGenerator.Util
         {
             Vector2 Origin = new Vector2(0, 0);
             Rectangle TileRec;
-            if (TileKey != GlobalConstants.NULL)
-            {
+            //if (TileKey != GlobalConstants.NULL)
+            //{
                 Tiles.TryGetValue(TileKey, out TileRec);
-                if (Editor == null) Draw.spriteBatch.Draw(TileSet, Pos, TileRec, Color.White, 0f, Origin, GlobalVariables.TILE_SCALE, SpriteEffects.None, (1f / (Layer + 1)));
-                else Editor.spriteBatch.Draw(TileSet, Pos, TileRec, Color.White,0f,Origin,GlobalVariables.TILE_SCALE,SpriteEffects.None,(1f/(Layer+1)));
-            }
+                if (Editor == null) Draw.spriteBatch.Draw(TileSet, Pos, TileRec, Color.White, 0f, Origin,this.fTileScale, SpriteEffects.None, (1f / (Layer + 1)));
+                else Editor.spriteBatch.Draw(TileSet, Pos, TileRec, Color.White,0f,Origin,this.fTileScale,SpriteEffects.None,(1f/(Layer+1)));
+            //}
         }
 
         /// <summary>
@@ -104,8 +105,40 @@ namespace MapGenerator.Util
         {
             for(int i = 0; i < M.Layers.Count; i++)
             {
+                this.fTileScale = GlobalVariables.TILE_SCALE;
                 BeginDrawing();
                 DrawLayer(M.Height, M.Width, M.Layers[i]);
+                EndDrawing();
+            }
+        }
+
+        /// <summary>
+        /// Draws a map object by starting with the 0th layer and drawing all layers on top of it
+        /// </summary>
+        public void DrawMap(Map M, float fTileScale)
+        {
+            for (int i = 0; i < M.Layers.Count; i++)
+            {
+                this.fTileScale = fTileScale;
+                BeginDrawing();
+                DrawLayer(M.Height, M.Width, M.Layers[i]);
+                EndDrawing();
+            }
+        }
+
+        /// <summary>
+        /// Draws a map object by starting with the 0th layer and drawing all layers on top of it.
+        /// Allows control over each tiles Height and Width.
+        /// </summary>
+        /// <param name="M"></param>
+        /// <param name="Height"></param>
+        /// <param name="Width"></param>
+        public void DrawMap(Map M, int Tile_Height, int Tile_Width)
+        {
+            for (int i = 0; i < M.Layers.Count; i++)
+            {
+                BeginDrawing();
+                DrawLayer(M.Height, M.Width, Tile_Height, Tile_Width, M.Layers[i]);
                 EndDrawing();
             }
         }
